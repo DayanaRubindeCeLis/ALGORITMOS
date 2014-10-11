@@ -1,0 +1,72 @@
+// laboratorio_estructura.cpp : Defines the entry point for the console application.
+// Dayana Rubin de Celis Aguilera 2012113958
+
+#include "stdafx.h"
+#include "stdio.h"
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+#define N 100
+using namespace std;
+
+struct vector{
+    int vec[N];
+};
+
+void genera_fibo(vector vec[N],int n, int m){
+int a=-1, b=1, f=0;
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+            f=a+b;
+            vec[i].vec[j]=f;
+            a=b;
+            b=f;
+        }
+    }
+}
+
+void mostrar(vector vec[N], int m, int n){
+	for(int i=0;i<m;i++){
+		for(int j=0;j<n;j++){
+            cout<<vec[i].vec[j]<<" ";
+        }
+        cout<<" ";
+    }
+}
+
+int main(){
+int n,m;
+vector vec[N];
+cout<<endl<<"Ingrese tamaño del vector principal: ";
+cin>>m;
+cout<<endl<<"Ingrese tamaño del vector secundario: ";
+cin>>n;
+genera_fibo(vec,n,m);
+mostrar(vec,m,n);
+getch();
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
