@@ -1,0 +1,349 @@
+#include "stdafx.h"
+#include <math.h>
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+#define fil 6
+#define col 6
+
+void mostrar(float matriz[fil][col],int tam)
+{
+	int i,j;
+	for(i=0;i<tam;++i)
+	{
+		for(j=0;j<tam;++j)
+		{
+			cout<<matriz[i][j]<<"\t";
+		}
+		cout<<endl;
+	}
+	cout<<endl;
+}
+
+
+float determinante(float matriz[fil][col],int tam)
+{
+	float x, aux[fil][col];
+	int i,j,colum,k;
+	x=matriz[0][0];
+	if(tam==2)
+	{
+		x=matriz[0][0]*matriz[1][1]-matriz[0][1]*matriz[1][0];
+	}
+	if(tam>2)
+	{
+		x=0;
+		for(i=0;i<tam;i++)
+		{
+			j=0;
+			for(colum=0;colum<tam;colum++)
+			{
+				if(colum!=i)
+				{
+					for(k=0;k<tam-1;k++)
+					{
+						aux[k][j]=matriz[k+1][colum];
+					}
+					j++;
+				}
+			}
+			if(i%2==0)
+			{
+				x=x+matriz[0][i]*determinante(aux,tam-1);
+			}
+			else
+			{
+				x=x-matriz[0][i]*determinante(aux,tam-1);
+			}
+		}
+	}
+	return x;
+}
+
+void Transponer(float matriz[fil][col],int tam)
+{
+	int i,j;
+	float aux;
+	for(i=0;i<tam;++i)
+	{
+		for(j=0;j<tam;++j)
+		{
+			if(i>j)
+			{
+				aux = matriz[i][j];
+				matriz[i][j] = matriz[j][i];
+				matriz[j][i] = aux;
+			}
+		}
+	}
+}
+
+void Adjunta(float matriz[fil][col],float adj[fil][col],int tam)
+{
+	float aux[fil][col];
+	int c,f,i,j,cc,ff;
+
+	for(f=0;f<tam;f++)
+	{
+		for(c=0;c<tam;c++)
+		{
+			i=0;
+			for(ff=0;ff<tam;ff++)
+			{
+				j=0;
+				for(cc=0;cc<tam;cc++)
+				{
+					if(cc!= c && f != ff)
+					{
+						aux[i][j]=matriz[ff][cc];
+						j++;
+					}
+				}
+				if(ff != f)
+				{
+					i++;
+				}
+			}
+			adj[f][c] = powf(-1,f+c)*determinante(aux,tam-1);
+		}
+	}
+}
+
+void MultN(float matriz[fil][col],int tam,float n)
+{
+	for(int i=0;i<tam;++i)
+	{
+		for(int j=0;j<tam;++j)
+		{
+			matriz[i][j] = matriz[i][j] * n;
+		}
+	}
+}
+
+void sumar(float m1[fil][col],float m2[fil][col],int tam,float matrizC[fil][col])
+{
+	for(int i=0;i<tam;++i)
+	{
+		for(int j=0;j<tam;++j)
+		{
+			matrizC[i][j]=m1[i][j]+m2[i][j];
+		}
+	}
+}
+void Multiplica(float m1[fil][col],float m2[fil][col],int tam,float matrizC[fil][col])
+{
+	for(int i=0;i<tam;++i)
+	{
+		for(int j=0;j<tam;++j)
+		{
+			matrizC[i][j]=0;
+			for(int k = 0;k<tam;++k)
+			{
+				matrizC[i][j] = matrizC[i][j] + m1[i][k] * m2[k][j];
+			}
+		}
+	}
+}
+
+void cargar(float matriz[fil][col],int tam)
+{
+	cout<<"Ingresar Elementos"<<endl<<endl;
+	for(int i=0;i<tam;i++)
+	{
+		for(int j=0;j<tam;j++)
+		{
+			cout<<"["<<i+1<<"]["<<j+1<<"]:";
+			cin>>matriz[i][j];
+		}
+	}
+}
+
+void copiar(float m1[fil][col],float m2[fil][col],int tam)
+{
+	for(int i=0;i<tam;i++)
+	{
+		for(int j=0;j<tam;j++)
+		{
+			m1[i][j] = m2[i][j];
+		}
+	}
+}
+
+
+void invertir(float matriz[fil][col],float inversa[fil][col], int tam)
+{
+	Adjunta(matriz,inversa,tam);
+	Transponer(inversa,tam);
+	MultN(inversa,tam,1/determinante(matriz,tam));
+}
+
+bool verifesmagica(float matriz[fil][col], int tam)
+{
+	int i,j,s=0,f,c;
+	bool mag = true;
+	for(i=0;i<tam;i++)
+	{
+		s = s + matriz[i][1];
+	}
+	for(i=0;i<tam;i++)
+	{
+		f = 0;
+		c = 0;
+		for(j=0;j<tam;j++)
+		{
+			f = f + matriz[i][j];
+			c = c + matriz[j][i];
+		}
+		if(c != s || f != s)
+		{
+			mag = false;
+		}
+	}
+	if(mag)
+	{
+		cout<<"es magica, suma: "<<s<<endl;
+	}
+	else
+	{
+		cout<<"no es magica"<<endl;
+	}
+	return mag;
+}
+
+void cargarcircular(float matriz[fil][col],int n)
+{
+	int c=0,i,j=0,num;
+	for(int i=n-1; i > 0; i--, j++)
+    {
+        for(num=j; num < i; num++)
+        {
+			matriz[j][num] = c;
+        	c++;
+        }
+        for(num=j; num < i; num++)
+        {	
+			matriz[num][n-j-1] = c;
+        	c++;
+        }
+        for(num=i; num > j; num--)
+        {
+			matriz[n-j-1][num] = c;
+        	c++;
+        }
+        for(num=i; num > j; num--)
+        {
+			matriz[num][j] = c;
+        	c++;
+		}
+	}
+	if(n%2==1)
+	{
+		matriz[n/2][n/2]=c;
+	}
+}
+
+void cargardiagonales(float matriz[fil][col],int n)
+{
+	int i,j;
+	int c = 1;
+	for(i=0;i<n;i++)
+	{
+		matriz[i][i] = c;
+		c++;
+	}
+	for(i=0;i<n-1;i++)
+	{
+		for(j=0;j<n-1-i;j++)
+		{
+			matriz[j+i+1][j]=c;
+			c++;
+		}
+	}
+	for(i=0;i<n-1;i++)
+	{
+		for(j=0;j<n-1-i;j++)
+		{
+			matriz[j][i+j+1]=c;
+			c++;
+		}
+	}
+}
+
+int main()
+{
+	float matriz[fil][col],matrizaux[fil][col],matrizC[fil][col];
+	int tam,opcion=0;
+	cout<<"tamanho de matriz:";
+	cin>>tam;
+	cargar(matriz,tam);
+	do
+	{
+		cout<<"1 nueva Matriz"<<endl;
+		cout<<"2 mostrar"<<endl;
+		cout<<"3 traspuesta"<<endl;
+		cout<<"4 inversa"<<endl;
+		cout<<"5 sumar"<<endl;
+		cout<<"6 multiplicar"<<endl;
+		cout<<"7 verificar si es magica"<<endl;
+		cout<<"8 cargar circular"<<endl;
+		cout<<"8 cargar por diagonales"<<endl;
+		cout<<"0 salir"<<endl;
+		cout<<"opcion:";
+		cin>>opcion;
+
+		if(opcion==1)
+		{
+			cargar(matriz,tam);
+		}
+		if(opcion==2)
+		{
+			mostrar(matriz,tam);
+		}
+		if(opcion==3)
+		{
+			Transponer(matriz,tam);
+			mostrar(matriz,tam);
+		}
+		if(opcion==4)
+		{
+			invertir(matriz,matrizaux,tam);
+			copiar(matriz,matrizaux,tam);
+			mostrar(matriz,tam);
+		}
+		if(opcion==5)
+		{
+			cargar(matrizaux,tam);
+			sumar(matriz,matrizaux,tam,matrizC);
+			mostrar(matrizC,tam);
+			copiar(matriz,matrizC,tam);
+		}
+		if(opcion==6)
+		{
+			cargar(matrizaux,tam);
+			Multiplica(matriz,matrizaux,tam,matrizC);
+			mostrar(matrizC,tam);
+			copiar(matriz,matrizC,tam);
+		}
+		if(opcion==7)
+		{
+			verifesmagica(matriz,tam);
+		}
+		if(opcion==8)
+		{
+			cargarcircular(matriz,tam);
+			mostrar(matriz,tam);
+		}
+		if(opcion==9)
+		{
+			cargardiagonales(matriz,tam);
+			mostrar(matriz,tam);
+		}
+	
+	}while(opcion!=0);
+
+	return 0;
+}
+
+
+Enter file contents here
