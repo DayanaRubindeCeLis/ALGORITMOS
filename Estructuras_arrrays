@@ -1,0 +1,162 @@
+#include "stdafx.h"
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+struct cadena
+{
+	char cad[20];
+};
+
+struct vector
+{
+	cadena vec[20];
+};
+
+struct matriz
+{
+	int mat[20][20];
+};
+void cargarvecdevec(vector vecdevec[20],int n)
+{
+	int i,j;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			cout<<"pos "<<i<<","<<j<<":";
+			gets(vecdevec[i].vec[j].cad);
+		}
+	}
+}
+void mostrarMDV(vector vecdevec[20][20],int n)
+{
+	int i,j,k;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				cout<<"pos "<<i<<","<<j<<","<<k<<":"<<vecdevec[i][j].vec[k].cad;
+			}
+		}
+	}
+}
+void vecdevec_a_matdevec(vector vecdevec[20],vector matdevec[20][20],int n)
+{
+	int i,j,k;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				strcpy(matdevec[i][j].vec[k].cad,vecdevec[i].vec[j].cad);
+			}
+		}
+	}
+}
+
+void cargarmatdemat(matriz matdemat[20][20],int n)
+{
+	int i,j,k,m;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				for(m=0;m<n;m++)
+				{
+					cout<<"mat "<<i<<","<<j<<" pos "<<k<<","<<m<<":";
+					cin>>matdemat[i][j].mat[k][m];
+				}
+			}
+		}
+	}
+}
+
+void invertirparte(matriz matdemat[20][20],int n)
+{
+	int i,j,k,m,aux;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n-i;j++)
+		{
+			if((i+j)%2==0)
+			{
+				for(k=0;k<n;k++)
+				{
+					for(m=0;m<n;m++)
+					{
+						aux = matdemat[i][j].mat[k][m];
+						matdemat[i][j].mat[k][m] = matdemat[n-i-1][n-1-j].mat[n-1-k][n-1-m];
+						matdemat[n-i-1][n-1-j].mat[n-1-k][n-1-m] = aux;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+void mostrarMDM(matriz matdemat[20][20],int n)
+{
+	int i,j,k,m;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			for(k=0;k<n;k++)
+			{
+				for(m=0;m<n;m++)
+				{
+					cout<<"mat "<<i<<","<<j<<" pos "<<k<<","<<m<<":"<<matdemat[i][j].mat[k][m]<<" ";
+				}
+				cout<<"  ";
+			}
+			if(j==n-1)
+			{
+				cout<<endl;
+			}
+		}
+	}
+}
+
+int main()
+{
+	vector vecdevec[20],matdevec[20][20];
+	matriz matdemat[20][20];
+	int tam,opcion=0;
+	cout<<"tamanho de matriz:";
+	cin>>tam;
+	cin.ignore();
+	do
+	{
+		cout<<"1 vector de vector a matriz de vector"<<endl;
+		cout<<"2 invertir parte de matriz de matriz"<<endl;
+		cout<<"0 salir"<<endl;
+		cout<<"opcion:";
+		cin>>opcion;
+
+		if(opcion==1)
+		{
+			cargarvecdevec(vecdevec,tam);
+			vecdevec_a_matdevec(vecdevec,matdevec,tam);
+			mostrarMDV(matdevec,tam);
+		}
+		if(opcion==2)
+		{
+			cargarmatdemat(matdemat,tam);
+			mostrarMDM(matdemat,tam);
+			invertirparte(matdemat,tam);
+			mostrarMDM(matdemat,tam);
+		}
+	}while(opcion!=0);
+
+	return 0;
+}
+
+
+Enter file contents here
