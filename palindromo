@@ -1,0 +1,32 @@
+#include "stdafx.h"
+#include "stdio.h"
+#include "conio.h"
+#include <iostream>
+using namespace std;
+
+int es_palindroma(char palabra[])
+{int p=0;
+ int j=(int)strlen(palabra)-1;
+ for(int i=0;i< strlen(palabra)/2;i++)
+ {if(palabra[i]!=palabra[j])
+   {p=1;
+   }
+ j--;
+ }
+	return p;
+}
+
+int main()
+{char cad[200],p;
+cout<<"Ingresar Palabra: ";
+ gets(cad);
+ p=es_palindroma(cad);
+ if(p==0)
+ {cout<<"Si es palindroma";
+ }else{cout<<"No es palindroma";
+      }
+ getch();
+}
+
+
+Enter file contents here
