@@ -1,0 +1,36 @@
+bool primo(int n)
+{int i=0,contador=0;
+ for((n%1)==0)
+  {contador++;}
+}
+
+int numeroInvertido(int n)
+  {while(n>0)
+     { dig=n%10;
+       numero=(numero+10)+dig;
+	   n=n/10;
+     }
+   return(numero);
+  }
+
+int concatenar(int num1,int num2)
+  {int numero1, numero2, dig;
+   bool auxiliar1=1, bool auxiliar2=0;
+
+   auxiliar1=primo(num1);
+   auxiliar2=primo(num2);
+   numero1=num1;
+   numero2=numeroInvertido(num2);
+
+   if((auxiliar1==true)&&(auxiliar2==true))
+      {while(numero2>)
+	    {dig=numero2%10;
+         numero1=(numero1/10)+dig;
+         numero2=numero2/10;
+        }
+       return(numero1);
+      }
+   else{return(0;)}
+  }
+
+ter file contents here
