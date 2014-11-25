@@ -1,0 +1,93 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+using namespace std;
+int obCantDigitos (int nro) 
+{
+	int c=0;
+	while (nro>0)
+	{
+		nro/=10;
+
+	 c++;
+
+	}
+	return (c);
+}
+ int sumarDigitos (int nro)
+ {
+	 int s=0, dig;
+	 while (nro>0)
+	 {
+	 dig=nro%10;
+	 nro= nro/10;
+	 s= s+dig;
+	 }
+	 return (s);
+ }
+ int sumarImparesDigitos (int nro)
+ {
+	 int s=0, dig;
+	 while (nro>0)
+	 {
+	 dig=nro%10;
+	 nro= nro/10;
+	 if(dig%2!=0){
+	 s= s+dig;
+	 }
+	 return (s);
+	 }
+ }
+ bool verifordenado (int nro) {
+	 int digAct,digAnt=9;
+bool band=true;
+while(nro>0){
+	digAct=nro%10;
+	if(digAct<=digAnt){
+		digAnt=digAct;
+	}
+	else{
+		band=false;
+	}
+	nro=nro/10;
+}
+return (band);
+ }
+void main()
+{int a,r,t,d,i,opcion;
+cout<<"Ingrese un numero:";
+cin>>a;
+do{
+	cout<<endl<<"** M E N U**";
+	cout<<endl<<"1.- Cantidad de digitos";
+	cout<<endl<<"2.- Sumar todos los dígitos";
+	cout<<endl<<"3.- Sumar los dígitos impares";
+	cout<<endl<<"0.- Salir";
+	cout<<endl<<"4.-Número Nuevo";
+	cout<<endl<<"5.- Ingresar Nuevo numero";
+	cout<<endl<<"Seleccione opcion :";
+	cin>>opcion;
+	switch(opcion) 
+	{
+case 1: r=obCantDigitos(a);
+	cout<<"La cantidad de digitos es :"<<r;
+	break;
+case 2: t=sumarDigitos(a);
+	cout<<"La suma de todos los numeros es :" <<t;
+	break;
+case 3: d=sumarImparesDigitos(a);
+	cout<<"La suma de digitos impares es;"<<d;
+	break;
+case 4: cout<< endl<<"5.- Introducir Nuevo numero";
+		cin>>a;
+		break;
+
+	case 5:if (verifordenado (a))
+			   cout<<"El numero esta ordenado";
+		   else
+			   cout<<"El numero No esta ordenado";
+		break;
+	}while(opcion!=0);
+}
+
+}Enter file contents here
