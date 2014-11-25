@@ -1,0 +1,75 @@
+#include "stadfx.h"
+#include "stdio.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+void main(){
+	int a,b,r,c=0;
+	cout<<"Introducir un numero";
+	cin>>a;
+	cout<<"Introducir la cantidad de veces ";
+	cin>>b;
+	
+	while(c<b){
+		r=r+a;
+	
+	c++;
+
+	}
+
+	cout<<"La multiplicacion es------>"<<r;
+	getch();
+}	int a,b,r=0,c=0;
+	cout<<"Introducir un numero";
+	cin>>a;
+	cout<<"Introducir la cantidad de veces ";
+	cin>>b;
+	
+	while(r<b){
+		r=r+(a-b);
+		a=r;
+	
+	    c++;
+	}
+
+	cout<<"La division es------>"<<c;
+	getch();
+}
+void main(){
+	int a,b,r=0,c=0;
+	cout<<"Introducir un numero";
+	cin>>a;
+	cout<<"Introducir otro numero ";
+	cin>>b;
+	if(a>b){
+	cout<<"a es mayor que b";
+	}
+	else{
+		if(a<b){
+		cout<<" a es menor que b";
+		}
+		else{
+	cout<<"a es igual a b";
+	}
+	}
+	getch();
+}
+int a,b,r=0,c=0;
+	cout<<"Introducir un numero";
+	cin>>a;
+	cout<<"Introducir otro numero ";
+	cin>>b;
+	if(a>b){
+	cout<<"a es mayor que b";
+	}
+	else{
+		if(a<b){
+		cout<<" a es menor que b";
+		}
+		else{
+	cout<<"a es igual a b";
+	}
+	}
+	getch();
+}
+nter file contents here
