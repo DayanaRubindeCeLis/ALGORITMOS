@@ -1,0 +1,112 @@
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <stdlib.h>
+#include <math.h>
+# define N 100
+
+using namespace std;
+
+bool comparaParImpar (int m)
+{ 
+	int dig, par=0, dig=0;
+	while(m>0)
+	{ 
+		dig=m%10;
+		if (dig%2==0)
+		{ par ++;
+		}
+		dig++;
+		m=m/10;
+}
+if (par>dig/2)
+return true;
+else
+return false;
+}
+
+void eliminaElemento (int vec[], int &n, int pos)
+{ 
+	int i;
+	for (i=pos; i<n-1; i++)
+	{
+		vec [i]=vec[i+1];
+	}
+	n=n-1;
+}
+
+void eliminapar(int vec[], int &n)
+{
+	int i;
+	for(i=0;i<n;i++)
+	{
+		if(comparaParImpar)
+		{
+			eliminaElemento(vec,n,i);
+			i=i-1;
+		}
+	}
+}
+
+void insertarOrdenado(int vec[],int &n,int num)
+{
+	int i, pos=n;
+	for(i=0;i<n;i++)
+	{
+		if(vec[i]<num)
+		{
+			pos=i;
+			break;
+		}
+	}
+	
+}
+{
+	for(i=n;i>pos;i--)
+	{
+	vec[i]=vec[i-1];
+	}
+	vec[pos]=num;
+	n++;
+}
+
+int main()
+{
+int opcion,vec[N],A[N],B[N],C[N],n,m,tam=0,i,dig,num;
+do
+{
+	cout<<endl<<endl<<"MENU";
+	cout<<endl<<endl<<"1.- Eliminar pares:";
+	cout<<endl<<"2.-Insertar en su lugar:";
+	cout<<endl<<"3.-Mezclar sin repeticiones:";
+	cout<<endl<<"4.-Mezclar con repeticiones:";
+	cout<<endl<<"0.-Salir.";
+	cout<<endl<<endl<<"Elija su opcion: ";
+	cin>>opcion;
+switch(opcion)
+{
+case 1: cout<<"Tamanho del vector: ";
+cin>>n;
+for(i=0;i<n;i++){
+cout<<endl<<"Elemento: ";
+cin>>vec[i];
+}
+eliminapar(vec,n);
+break;
+case 2: cout<<"Tamanho del vector: ";
+cin>>n;
+for(i=0;i<n;i++)
+{
+cout<<endl<<"Elemento: ";
+cin>>vec[i];
+}
+cout<<endl<<"Ingrese elemento a insertar: ";
+cin>>num;
+insertarOrdenado(vec,n,num);
+break;
+}while(opcion!=0);
+system("pause");
+return 0;
+}
+Enter file contents here
