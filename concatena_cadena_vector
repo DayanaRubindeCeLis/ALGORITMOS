@@ -1,0 +1,81 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+using namespace std;
+
+struct cadenas{
+	char cad1[15];
+	char cad2[15];
+	char cad3[15];
+	char cad4[15];
+};
+
+struct estruDato{
+	char dato[50];
+};
+
+void cargar (cadenas vec[], int n){
+int i;
+for(i=0;i<n;i++){
+	cout<<"Introducir la cadena: ";
+	do{
+		gets(vec[i].cad1);
+	}while(strlen(vec[i].cad1)==0);
+	vec[i].cad2[0]='\0';//inicializar la cadena en vacia
+	vec[i].cad3[0]='\0';//inicializar la cadena en vacia
+	vec[i].cad4[0]='\0';//inicializar la cadena en vacia
+	}
+}
+
+void mostrar (cadenas vec[], int n){
+int i;
+cout<<endl<<"Los datos son --->> : ";
+for(i=0;i<n;i++){
+	cout<<endl<<vec[i].cad1<<" "<<vec[i].cad2<<" "<<vec[i].cad3<<" "<<vec[i].cad4;
+}
+}
+
+void copiar(cadenas vec[], int n){
+int i;
+for(i=0;i<n;i++){
+	strcpy(vec[i].cad2,vec[i].cad1);
+	strcpy(vec[i].cad3,vec[i].cad1);
+	strcpy(vec[i].cad4,vec[i].cad1);
+}}
+
+void concatenar(cadenas vec[], int n,estruDato vectorDato[]){
+	int i;
+	for(i=0;i<n;i++){
+		vectorDato[i].dato[0]='\0';
+		strcat(vectorDato[i].dato,vec[i].cad1);
+		strcat(vectorDato[i].dato,vec[i].cad2);
+		strcat(vectorDato[i].dato,vec[i].cad3);
+		strcat(vectorDato[i].dato,vec[i].cad4);
+
+	}
+}
+
+void mostrarVecDato (estruDato vec[], int n){
+int i;
+cout<<endl<<"Los datos VECTOR DATO son --->> : ";
+for(i=0;i<n;i++){
+	cout<<endl<<vec[i].dato;
+}
+}
+
+int main(){
+	int nro;
+	cadenas vector[20];
+	estruDato vectorDato[20];
+	cout<<"Cuantos elementos para el vector ? ";
+	cin>>nro;
+	cargar(vector,nro);
+	mostrar(vector,nro);
+	copiar(vector,nro);
+	mostrar(vector,nro);
+	concatenar(vector,nro,vectorDato);
+	mostrarVecDato(vectorDato,nro);
+	getch();
+	return(1);
+}
+Enter file contents here
