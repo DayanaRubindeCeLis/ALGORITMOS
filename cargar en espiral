@@ -1,0 +1,21 @@
+void cargarEspiral(int mat[FIL][COL],int n,int m){
+	int a,i,c=1;
+	a=0;
+	for(a=0;a<n/2;a++){
+		for(i=a;i<n-a;i++){
+			mat[a][i]=c++;
+		}
+		for(i=a+1;i<n-a;i++){
+			mat[i][n-a-1]=c++;
+		}
+		for(i=n-a-2;i>=a;i--){
+			mat[n-a-1][i]=c++;
+		}
+		for(i=n-a-2;i>a;i--){
+			mat[i][a]=c++;
+		}
+	}
+	if(n%2!=0)
+		mat[(n-1)/2][(n-1)/2]=c;
+}
+
