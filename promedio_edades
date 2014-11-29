@@ -1,0 +1,48 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+
+#define TAM 100
+
+using namespace std;
+
+struct Reg{
+
+	int numEmp;
+	int edad;
+	int salario;
+
+};
+
+void main(){
+
+	int i,j,k,prom,s=0,n;
+	Reg vec[TAM];
+	
+	cout<<"Ingresar numero de empleados: ";
+	cin>>n;
+
+	for(i=0;i<n;i++){
+		
+		vec[i].numEmp=(i+1);
+		cout<<"\n Ingresar edad del empleado "<<i+1<<" : ";
+		cin>>vec[i].edad;
+		cout<<" Ingresar salario del empleado"<<i+1<<" : ";
+		cin>>vec[i].salario;
+		
+		s=s+(vec[i].edad);
+
+	}
+
+	prom=s/n;
+
+	cout<<endl<<"El promedio de edades de los "<<n<<" empleados es :" <<prom;
+
+	cout<<endl<<"Los empleados que superan la edad promedio son:"; 
+	
+	for(k=0;k<n;k++){
+		if(vec[k].edad>prom)
+			cout<<endl<<"Numero de Empleado: "<<vec[k].numEmp<<" \n";
+	}
+	getch();
+}
