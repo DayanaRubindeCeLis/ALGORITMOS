@@ -1,0 +1,54 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+
+#define TAM 50
+
+using namespace std;
+
+void cargar_vector(float v[TAM], int num_elem);
+
+float mostrar_mayor(float v[TAM], int num_elem);
+
+
+void main(){
+
+	float vec[TAM], may;
+	int n;
+	cout<<"Ingresar el numero de elementos del vector: ";
+	cin>>n;
+	cargar_vector(vec,n);
+	may=mostrar_mayor(vec,n);
+	cout<<"El numero mayor es: "<<may;
+		
+	getch();
+
+}
+
+void cargar_vector(float v[], int num_elem){
+
+	int i;
+
+	for(i=0;i<num_elem;i++){
+		cout<<"Ingresar elemento: ";
+		cin>>v[i];
+	}
+	
+}
+	float mostrar_mayor(float v[], int num_elem){
+
+	int i;
+	float mayor;
+	mayor=v[0];
+	for(i=0;i<num_elem;i++){
+		if(v[i]>mayor)
+			mayor=v[i];
+	}
+	 
+	return (mayor);
+	getch();
+	}
+		
+	
+
+
